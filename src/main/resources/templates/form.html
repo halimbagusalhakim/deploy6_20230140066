@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Form Input - MY Website 20210140019</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<div class="topbar">
+    <span class="brand">MY Website 20210140019</span>
+    <span class="nim-badge">NIM: 20210140019</span>
+</div>
+
+<div class="page-wrap">
+    <div class="card" style="max-width:520px; margin:0 auto;">
+        <div class="form-card-header">
+            <h2>Form Input Mahasiswa</h2>
+            <p>Isi data mahasiswa di bawah ini dengan benar.</p>
+        </div>
+
+        <form th:action="@{/form}" th:object="${user}" method="post">
+            <div class="form-group">
+                <label for="nama">Nama:</label>
+                <input type="text" id="nama" th:field="*{nama}"
+                       placeholder="Masukkan nama lengkap" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="nim">NIM:</label>
+                <input type="text" id="nim" th:field="*{nim}"
+                       placeholder="Masukkan NIM" required/>
+            </div>
+
+            <div class="form-group">
+                <label>Jenis Kelamin:</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" th:field="*{jenisKelamin}" value="Laki-laki" required/>
+                        Laki-laki
+                    </label>
+                    <label>
+                        <input type="radio" th:field="*{jenisKelamin}" value="Perempuan"/>
+                        Perempuan
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a th:href="@{/home}" class="btn btn-outline">Kembali ke Home</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
