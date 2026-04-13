@@ -3,28 +3,56 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Home - MY Website 20210140019</title>
+    <title>Home — MY Website</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
 
-<div class="topbar">
-    <span class="brand">MY Website 20210140019</span>
-    <span class="nim-badge">NIM: 20210140019</span>
-</div>
+<nav class="topbar">
+    <div class="topbar-left">
+        <div class="topbar-logo">M</div>
+        <span class="topbar-brand">MY Website</span>
+    </div>
+    <span class="topbar-nim">NIM: 20210140019</span>
+</nav>
 
 <div class="page-wrap">
+
+    <!-- Header -->
     <div class="page-header">
-        <h2>Dashboard Mahasiswa</h2>
-        <p>Selamat datang di aplikasi! Data bersifat temporary (sesi).</p>
+        <div class="page-header-top">
+            <h1 class="page-title">Dashboard Mahasiswa</h1>
+            <span class="name-tag">20210140019</span>
+        </div>
+        <p class="page-subtitle">Selamat datang di aplikasi! Data bersifat temporary (tersimpan di sesi).</p>
     </div>
 
-    <a th:href="@{/form}" class="add-link">
-        <span class="plus">+</span> Input Data Mahasiswa
-    </a>
+    <!-- Stat cards -->
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="stat-label">Total Data</div>
+            <div class="stat-value" th:text="${#lists.size(userList)}">0</div>
+        </div>
+        <div class="stat-card accent">
+            <div class="stat-label">Status</div>
+            <div class="stat-value" style="font-size:1.1rem; margin-top:6px;">Temporary</div>
+        </div>
+        <div class="stat-card success">
+            <div class="stat-label">Session</div>
+            <div class="stat-value" style="font-size:1.1rem; margin-top:6px;">Aktif</div>
+        </div>
+    </div>
 
-    <div class="card table-section">
-        <h3>Data Mahasiswa</h3>
+    <!-- Table -->
+    <div class="table-card">
+        <div class="table-head">
+            <span class="table-title">Data Mahasiswa</span>
+            <a th:href="@{/form}" class="add-btn">
+                <span class="add-btn-icon">+</span>
+                Input Data
+            </a>
+        </div>
+
         <table class="data-table">
             <thead>
             <tr>
@@ -35,21 +63,32 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${#lists.isEmpty(userList)}" class="empty-row">
-                <td colspan="4">Belum ada data</td>
+            <tr th:if="${#lists.isEmpty(userList)}">
+                <td colspan="4" class="empty-cell">
+                    Belum ada data mahasiswa
+                </td>
             </tr>
             <tr th:each="u, stat : ${userList}">
-                <td class="no-cell" th:text="${stat.index + 1}"></td>
+                <td th:text="${stat.index + 1}"></td>
                 <td th:text="${u.nama}"></td>
                 <td th:text="${u.nim}"></td>
-                <td th:text="${u.jenisKelamin}"></td>
+                <td>
+                        <span class="badge badge-lk" th:if="${u.jenisKelamin == 'Laki-laki'}"
+                              th:text="${u.jenisKelamin}"></span>
+                    <span class="badge badge-pr" th:if="${u.jenisKelamin == 'Perempuan'}"
+                          th:text="${u.jenisKelamin}"></span>
+                </td>
             </tr>
             </tbody>
         </table>
 
-        <a th:href="@{/logout}" class="logout-link">⬡ Logout</a>
+        <div class="table-footer">
+            <a th:href="@{/logout}" class="logout-link">
+                &#x2715; Logout
+            </a>
+        </div>
     </div>
-</div>
 
+</div>
 </body>
 </html>

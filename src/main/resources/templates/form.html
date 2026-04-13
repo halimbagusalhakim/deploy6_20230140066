@@ -3,57 +3,64 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Form Input - MY Website 20210140019</title>
+    <title>Form Input — MY Website</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
 
-<div class="topbar">
-    <span class="brand">MY Website 20210140019</span>
-    <span class="nim-badge">NIM: 20210140019</span>
-</div>
+<nav class="topbar">
+    <div class="topbar-left">
+        <div class="topbar-logo">M</div>
+        <span class="topbar-brand">MY Website</span>
+    </div>
+    <span class="topbar-nim">NIM: 20210140019</span>
+</nav>
 
-<div class="page-wrap">
-    <div class="card" style="max-width:520px; margin:0 auto;">
-        <div class="form-card-header">
-            <h2>Form Input Mahasiswa</h2>
-            <p>Isi data mahasiswa di bawah ini dengan benar.</p>
+<div class="form-page-wrap">
+    <div class="card">
+
+        <div class="form-card-top">
+            <div class="form-card-icon">&#128100;</div>
+            <div>
+                <div class="form-card-title">Form Input Mahasiswa</div>
+                <div class="form-card-sub">Isi data mahasiswa dengan benar dan lengkap.</div>
+            </div>
         </div>
 
         <form th:action="@{/form}" th:object="${user}" method="post">
             <div class="form-group">
-                <label for="nama">Nama:</label>
+                <label for="nama">Nama Lengkap</label>
                 <input type="text" id="nama" th:field="*{nama}"
-                       placeholder="Masukkan nama lengkap" required/>
+                       placeholder="Contoh: Budi Santoso" required/>
             </div>
 
             <div class="form-group">
-                <label for="nim">NIM:</label>
+                <label for="nim">NIM</label>
                 <input type="text" id="nim" th:field="*{nim}"
-                       placeholder="Masukkan NIM" required/>
+                       placeholder="Contoh: 20210140001" required/>
             </div>
 
             <div class="form-group">
-                <label>Jenis Kelamin:</label>
+                <label>Jenis Kelamin</label>
                 <div class="radio-group">
-                    <label>
+                    <label class="radio-option">
                         <input type="radio" th:field="*{jenisKelamin}" value="Laki-laki" required/>
-                        Laki-laki
+                        <span>&#9794; Laki-laki</span>
                     </label>
-                    <label>
+                    <label class="radio-option">
                         <input type="radio" th:field="*{jenisKelamin}" value="Perempuan"/>
-                        Perempuan
+                        <span>&#9792; Perempuan</span>
                     </label>
                 </div>
             </div>
 
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <a th:href="@{/home}" class="btn btn-outline">Kembali ke Home</a>
+            <div class="form-actions" style="margin-top: 24px;">
+                <button type="submit" class="btn btn-primary">Simpan Data</button>
+                <a th:href="@{/home}" class="btn btn-outline">Kembali</a>
             </div>
         </form>
+
     </div>
 </div>
-
 </body>
 </html>
