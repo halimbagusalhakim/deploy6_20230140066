@@ -1,66 +1,46 @@
 <!DOCTYPE html>
-<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Form Input — MY Website</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <meta charset="UTF-8">
+    <title>Form Input Mahasiswa</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h2 { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"] {
+            width: 100%; padding: 8px; margin-bottom: 15px;
+            border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
+        }
+        .radio-group { margin-bottom: 15px; }
+        .radio-group label { font-weight: normal; display: inline; margin-left: 5px; }
+        button { background-color: #007bff; color: white; padding: 9px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        a { display: block; margin-top: 10px; color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
 </head>
 <body>
+<div class="container">
+    <h2>Form Input Mahasiswa</h2>
+    <form th:action="@{/form}" th:object="${user}" method="post">
+        <label>Nama:</label>
+        <input type="text" th:field="*{nama}" required />
 
-<nav class="topbar">
-    <div class="topbar-left">
-        <div class="topbar-logo">M</div>
-        <span class="topbar-brand">MY Website</span>
-    </div>
-    <span class="topbar-nim">NIM: 20210140019</span>
-</nav>
+        <label>NIM:</label>
+        <input type="text" th:field="*{nim}" required />
 
-<div class="form-page-wrap">
-    <div class="card">
-
-        <div class="form-card-top">
-            <div class="form-card-icon">&#128100;</div>
-            <div>
-                <div class="form-card-title">Form Input Mahasiswa</div>
-                <div class="form-card-sub">Isi data mahasiswa dengan benar dan lengkap.</div>
-            </div>
+        <label>Jenis Kelamin:</label>
+        <div class="radio-group">
+            <input type="radio" th:field="*{jenisKelamin}" value="Laki-laki" id="lakiLaki" />
+            <label for="lakiLaki">Laki-laki</label><br>
+            <input type="radio" th:field="*{jenisKelamin}" value="Perempuan" id="perempuan" />
+            <label for="perempuan">Perempuan</label>
         </div>
 
-        <form th:action="@{/form}" th:object="${user}" method="post">
-            <div class="form-group">
-                <label for="nama">Nama Lengkap</label>
-                <input type="text" id="nama" th:field="*{nama}"
-                       placeholder="Contoh: Budi Santoso" required/>
-            </div>
-
-            <div class="form-group">
-                <label for="nim">NIM</label>
-                <input type="text" id="nim" th:field="*{nim}"
-                       placeholder="Contoh: 20210140001" required/>
-            </div>
-
-            <div class="form-group">
-                <label>Jenis Kelamin</label>
-                <div class="radio-group">
-                    <label class="radio-option">
-                        <input type="radio" th:field="*{jenisKelamin}" value="Laki-laki" required/>
-                        <span>&#9794; Laki-laki</span>
-                    </label>
-                    <label class="radio-option">
-                        <input type="radio" th:field="*{jenisKelamin}" value="Perempuan"/>
-                        <span>&#9792; Perempuan</span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="form-actions" style="margin-top: 24px;">
-                <button type="submit" class="btn btn-primary">Simpan Data</button>
-                <a th:href="@{/home}" class="btn btn-outline">Kembali</a>
-            </div>
-        </form>
-
-    </div>
+        <button type="submit">Submit</button>
+    </form>
+    <a th:href="@{/home}">Kembali ke Home</a>
 </div>
 </body>
 </html>

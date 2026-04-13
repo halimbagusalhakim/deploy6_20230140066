@@ -1,94 +1,51 @@
 <!DOCTYPE html>
-<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Home — MY Website</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; }
+        h2 { color: #333; }
+        a { color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        thead { background-color: #007bff; color: white; }
+        th, td { padding: 10px; text-align: center; border: 1px solid #ddd; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    </style>
 </head>
 <body>
+<div class="container">
+    <h2>MY Website 12345678</h2> <!-- Ganti 12345678 dengan NIM kamu -->
+    <p>Selamat datang di aplikasi!</p>
+    <a th:href="@{/form}">+ Input Data Mahasiswa</a>
 
-<nav class="topbar">
-    <div class="topbar-left">
-        <div class="topbar-logo">M</div>
-        <span class="topbar-brand">MY Website</span>
-    </div>
-    <span class="topbar-nim">NIM: 20210140019</span>
-</nav>
+    <h3>Data Mahasiswa</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>NIM</th>
+            <th>Jenis Kelamin</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(userList)}">
+            <td colspan="4">Belum ada data</td>
+        </tr>
+        <tr th:each="u, stat : ${userList}">
+            <td th:text="${stat.index + 1}"></td>
+            <td th:text="${u.nama}"></td>
+            <td th:text="${u.nim}"></td>
+            <td th:text="${u.jenisKelamin}"></td>
+        </tr>
+        </tbody>
+    </table>
 
-<div class="page-wrap">
-
-    <!-- Header -->
-    <div class="page-header">
-        <div class="page-header-top">
-            <h1 class="page-title">Dashboard Mahasiswa</h1>
-            <span class="name-tag">20210140019</span>
-        </div>
-        <p class="page-subtitle">Selamat datang di aplikasi! Data bersifat temporary (tersimpan di sesi).</p>
-    </div>
-
-    <!-- Stat cards -->
-    <div class="stats-row">
-        <div class="stat-card">
-            <div class="stat-label">Total Data</div>
-            <div class="stat-value" th:text="${#lists.size(userList)}">0</div>
-        </div>
-        <div class="stat-card accent">
-            <div class="stat-label">Status</div>
-            <div class="stat-value" style="font-size:1.1rem; margin-top:6px;">Temporary</div>
-        </div>
-        <div class="stat-card success">
-            <div class="stat-label">Session</div>
-            <div class="stat-value" style="font-size:1.1rem; margin-top:6px;">Aktif</div>
-        </div>
-    </div>
-
-    <!-- Table -->
-    <div class="table-card">
-        <div class="table-head">
-            <span class="table-title">Data Mahasiswa</span>
-            <a th:href="@{/form}" class="add-btn">
-                <span class="add-btn-icon">+</span>
-                Input Data
-            </a>
-        </div>
-
-        <table class="data-table">
-            <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>NIM</th>
-                <th>Jenis Kelamin</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:if="${#lists.isEmpty(userList)}">
-                <td colspan="4" class="empty-cell">
-                    Belum ada data mahasiswa
-                </td>
-            </tr>
-            <tr th:each="u, stat : ${userList}">
-                <td th:text="${stat.index + 1}"></td>
-                <td th:text="${u.nama}"></td>
-                <td th:text="${u.nim}"></td>
-                <td>
-                        <span class="badge badge-lk" th:if="${u.jenisKelamin == 'Laki-laki'}"
-                              th:text="${u.jenisKelamin}"></span>
-                    <span class="badge badge-pr" th:if="${u.jenisKelamin == 'Perempuan'}"
-                          th:text="${u.jenisKelamin}"></span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-        <div class="table-footer">
-            <a th:href="@{/logout}" class="logout-link">
-                &#x2715; Logout
-            </a>
-        </div>
-    </div>
-
+    <br>
+    <a th:href="@{/logout}">Logout</a>
 </div>
 </body>
 </html>
