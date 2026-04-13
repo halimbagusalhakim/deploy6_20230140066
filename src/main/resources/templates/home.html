@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Home - MY Website 20210140019</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<div class="topbar">
+    <span class="brand">MY Website 20210140019</span>
+    <span class="nim-badge">NIM: 20210140019</span>
+</div>
+
+<div class="page-wrap">
+    <div class="page-header">
+        <h2>Dashboard Mahasiswa</h2>
+        <p>Selamat datang di aplikasi! Data bersifat temporary (sesi).</p>
+    </div>
+
+    <a th:href="@{/form}" class="add-link">
+        <span class="plus">+</span> Input Data Mahasiswa
+    </a>
+
+    <div class="card table-section">
+        <h3>Data Mahasiswa</h3>
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>NIM</th>
+                <th>Jenis Kelamin</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(userList)}" class="empty-row">
+                <td colspan="4">Belum ada data</td>
+            </tr>
+            <tr th:each="u, stat : ${userList}">
+                <td class="no-cell" th:text="${stat.index + 1}"></td>
+                <td th:text="${u.nama}"></td>
+                <td th:text="${u.nim}"></td>
+                <td th:text="${u.jenisKelamin}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/logout}" class="logout-link">⬡ Logout</a>
+    </div>
+</div>
+
+</body>
+</html>
