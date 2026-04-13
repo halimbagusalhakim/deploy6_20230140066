@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login - MY Website 20210140019</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="login-wrap">
+    <div class="card login-card">
+        <div class="login-header">
+            <h1><span class="dot"></span>Login Page</h1>
+            <p>MY Website · 20210140019</p>
+        </div>
+
+        <!-- Alert error -->
+        <div class="alert alert-error" th:if="${error}" th:text="${error}"></div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username"
+                       placeholder="Masukkan username" required autofocus/>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password"
+                       placeholder="Masukkan password" required/>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Login</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
