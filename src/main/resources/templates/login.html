@@ -3,31 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f0f0; }
-        .container { width: 350px; margin: 80px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-        h2 { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="text"], input[type="password"] {
-            width: 100%; padding: 8px; margin-bottom: 15px;
-            border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
-        }
-        button { background-color: #007bff; color: white; padding: 9px 20px; border: none; border-radius: 4px; cursor: pointer; }
-        button:hover { background-color: #0056b3; }
-        .error { color: red; margin-bottom: 10px; }
-    </style>
 </head>
-<body>
-<div class="container">
-    <h2>Login Page</h2>
-    <p th:if="${error}" class="error" th:text="${error}"></p>
-    <form th:action="@{/login}" method="post">
-        <label>Username:</label>
-        <input type="text" name="username" required />
-        <label>Password:</label>
-        <input type="password" name="password" required />
-        <button type="submit">Login</button>
-    </form>
+<body style="font-family: Arial, sans-serif; background-color: #f0f0f0; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; box-sizing: border-box;">
+
+<div style="display: flex; width: 750px; min-height: 460px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+
+    <!-- BAGIAN GAMBAR (KIRI) -->
+    <div style="flex: 1; position: relative;">
+        <img src="/images/foto.jpg" alt="Background Login"
+             style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+
+        <!-- QUOTE CARD -->
+        <div style="position: absolute; bottom: 1.5rem; left: 1.25rem; right: 1.25rem;
+                    background: rgba(255,255,255,0.15);
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
+                    border: 1px solid rgba(255,255,255,0.25);
+                    border-radius: 10px;
+                    padding: 1rem 1.25rem;">
+
+            <div style="font-size: 28px; color: rgba(255,255,255,0.6); line-height: 1; margin-bottom: 6px;">"</div>
+
+            <p style="color: #fff; font-size: 14px; line-height: 1.6; font-style: italic; margin: 0 0 10px;">
+                Kesuksesan bukan tentang seberapa keras kamu bekerja,
+                tapi seberapa cerdas kamu mengambil langkah.
+            </p>
+
+            <div style="display: flex; align-items: center; gap: 10px;
+                        border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                <div style="width: 32px; height: 32px; border-radius: 50%;
+                            background: rgba(255,255,255,0.25);
+                            display: flex; align-items: center; justify-content: center;
+                            font-size: 13px; color: #fff; font-weight: bold;">H</div>
+                <div>
+                    <p style="color: #fff; font-size: 13px; font-weight: bold; margin: 0;">Sistem Manajemen</p>
+                    <p style="color: rgba(255,255,255,0.65); font-size: 11px; margin: 0;">Deploy6 App</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BAGIAN FORM (KANAN) -->
+    <div style="width: 320px; flex-shrink: 0; background: #fff;
+                padding: 2.5rem 2rem; display: flex; flex-direction: column; justify-content: center;">
+
+        <h2 style="font-size: 22px; margin: 0 0 4px;">Login</h2>
+        <p style="font-size: 13px; color: #666; margin: 0 0 1.5rem;">Masukkan kredensial Anda</p>
+
+        <p th:if="${error}" style="color: red; font-size: 13px; margin-bottom: 12px;" th:text="${error}"></p>
+
+        <form th:action="@{/login}" method="post">
+            <label style="display: block; font-size: 13px; color: #555; font-weight: bold; margin-bottom: 6px;">Username:</label>
+            <input type="text" name="username" placeholder="Masukkan username" required
+                   style="width: 100%; padding: 8px 10px; margin-bottom: 1rem;
+                          border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box;" />
+
+            <label style="display: block; font-size: 13px; color: #555; font-weight: bold; margin-bottom: 6px;">Password:</label>
+            <input type="password" name="password" placeholder="Masukkan password" required
+                   style="width: 100%; padding: 8px 10px; margin-bottom: 1.5rem;
+                          border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box;" />
+
+            <button type="submit"
+                    style="width: 100%; background-color: #007bff; color: white;
+                           padding: 10px; border: none; border-radius: 6px;
+                           font-size: 14px; cursor: pointer;">Login</button>
+        </form>
+    </div>
+
 </div>
 </body>
 </html>

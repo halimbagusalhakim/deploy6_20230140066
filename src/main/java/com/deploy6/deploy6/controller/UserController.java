@@ -1,23 +1,21 @@
 package com.deploy6.deploy6.controller;
 
-
 import com.deploy6.deploy6.model.User;
+import com.deploy6.deploy6.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class UserController {
 
     private static final String USERNAME = "admin";
-    private static final String PASSWORD = "12345678"; // Ganti dengan NIM kamu
+    private static final String PASSWORD = "12345678";
 
-    // Simpan data sementara (temporary, tidak ke database)
-    private List<User> userList = new ArrayList<>();
+    @Autowired
+    private UserRepository userRepository;
 
     // ===================== LOGIN =====================
 
@@ -52,7 +50,7 @@ public class UserController {
         if (session.getAttribute("loggedIn") == null) {
             return "redirect:/login";
         }
-        model.addAttribute("userList", userList);
+        model.addAttribute("userList", userRepository.findAll());
         return "home";
     }
 
@@ -72,7 +70,7 @@ public class UserController {
         if (session.getAttribute("loggedIn") == null) {
             return "redirect:/login";
         }
-        userList.add(user);
+        userRepository.save(user);
         return "redirect:/home";
     }
 
